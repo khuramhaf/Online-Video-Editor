@@ -1,4 +1,38 @@
 function trim(){
+    if (videoDecoder.state==="configured"){
+        videoDecoder.reset();
+    }
+
+
+    if (videoDecoder.state==="unconfigured"){
+        var config = {
+            codec:codecinfo,
+            codedWidth:videoinfo.width/2,
+              codedHeight: videoinfo.height/2,
+              
+              description:avcC,
+            
+            
+            
+            }
+        videoDecoder.configure(config);
+        
+        }
+        
+        
+        
+        var  init  = {
+            type: 'key',
+            data: keyframe,
+            timestamp: 2000,
+            duration: 37,
+            }; 
+            
+            var chunk = new EncodedVideoChunk(init);
+            
+            videoDecoder.decode(chunk);
+
+
 
     clearInterval(intervalid);
     clearInterval(videointerval)

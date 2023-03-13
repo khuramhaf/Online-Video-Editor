@@ -20,7 +20,7 @@ time = parseInt(start);
 
 
 
-var final = end - start;
+var final1 = end - start;
 
 if (sourcecheck === null){
 
@@ -98,28 +98,73 @@ document.getElementById("error").innerHTML = "Ending Point is greater than equal
          
          source.buffer=audiobuffer;
          source.connect(audiocontext.destination);
-         source.start(0, start, final);
+         source.start(0, start, final1);
 
          //videoplay
+         if (videoDecoder.state==="configured"){
+            videoDecoder.reset();
+        }
+         if (videoDecoder.state==="unconfigured"){
+            var config = {
+                codec:codecinfo,
+                codedWidth:videoinfo.width/2,
+                  codedHeight: videoinfo.height/2,
+                  
+                  description:avcC,
+                
+                
+                
+                }
+            videoDecoder.configure(config);
+            
+            }
+            
+            
+            
+            var  init  = {
+                type: 'key',
+                data: keyframe,
+                timestamp: 2000,
+                duration: 37,
+                }; 
+                
+                var chunk = new EncodedVideoChunk(init);
+                
+                videoDecoder.decode(chunk);
+
+         var intervalcounter = start*videoinfo.samplerate+1;
+       
 
          setTimeout(()=>{
+			 
+			 
+		
+			 
+       
+   
+
+        if (videoDecoder.state==="unconfigured"){
+
             var config = {
-        codec:codecinfo,
-        codedWidth:videoinfo.width/2,
-          codedHeight: videoinfo.height/2,
-          
-          description:avcC,
-        
-        
-        
+                codec:codecinfo,
+                codedWidth:videoinfo.width/2,
+                  codedHeight: videoinfo.height/2,
+                  
+                  description:avcC,
+                
+                
+                
+                }
+            videoDecoder.configure(config);
         }
-        videoDecoder.configure(config);
-        
+
+      
+
         var  init  = {
         type: 'key',
-        data: keyframe,
-        timestamp: 33+intervalcounter,
-        duration: 40,
+        data: videodata[start*videoinfo.samplerate],
+        timestamp: 2000,
+        duration: 37,
         }; 
         
         var chunk = new EncodedVideoChunk(init);
@@ -129,15 +174,13 @@ document.getElementById("error").innerHTML = "Ending Point is greater than equal
         
         
           },0)
-          intervalcounter = start*videoinfo.samplerate;
+          
         
           document.getElementById("canvas1").width = videoinfo.width/2
           document.getElementById("canvas1").height = videoinfo.height/2
         
         
-          if (videoDecoder.state==="configured"){
-                videoDecoder.reset();
-            }
+          
            
             clearInterval(videointerval);
         
@@ -145,15 +188,10 @@ document.getElementById("error").innerHTML = "Ending Point is greater than equal
          videointerval = setInterval(()=>{
     
         
-           
-        
-            
-        
-        
-        
+          
         
         var  init  = {
-        type: 'key',
+        type: 'delta',
         data: videodata[intervalcounter],
         timestamp: 33+intervalcounter,
         duration: 40,

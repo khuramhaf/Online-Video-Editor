@@ -34,22 +34,46 @@ function exportdata(){
       var ab1=  audiobuffer.getChannelData(0);
    ab1.set(array);
 
-   setTimeout(()=>{
-    var config = {
-codec:codecinfo,
-codedWidth:videoinfo.width/2,
-  codedHeight: videoinfo.height/2,
-  
-  description:avcC,
-
-
-
+   if (videoDecoder.state==="configured"){
+    videoDecoder.reset();
 }
-videoDecoder.configure(config);
+
+
+   if (videoDecoder.state==="unconfigured"){
+    var config = {
+        codec:codecinfo,
+        codedWidth:videoinfo.width/2,
+          codedHeight: videoinfo.height/2,
+          
+          description:avcC,
+        
+        
+        
+        }
+    videoDecoder.configure(config);
+    
+    }
+    
+    
+    
+    var  init  = {
+        type: 'key',
+        data: keyframe,
+        timestamp: 2000,
+        duration: 37,
+        }; 
+        
+        var chunk = new EncodedVideoChunk(init);
+        
+        videoDecoder.decode(chunk);
+
+var intervalcounter = 1;
+   setTimeout(()=>{
+ 
 
 var  init  = {
 type: 'key',
-data: keyframe,
+data: videodata[0],
 timestamp: 33+intervalcounter,
 duration: 40,
 }; 
@@ -62,11 +86,6 @@ videoDecoder.decode(chunk);
 
   },0)
   intervalcounter = 1;
-
-
-  if (videoDecoder.state==="configured"){
-        videoDecoder.reset();
-    }
    
     clearInterval(videointerval);
 

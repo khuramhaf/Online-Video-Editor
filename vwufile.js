@@ -23,9 +23,12 @@ function myFunction() {
      fr.onload = function(){
 
         var extractaudiodata = fr.result.slice(0, fr.result.byteLength)
+
+      
       
        audiocontext.decodeAudioData(extractaudiodata, function(audiofile){
         var x = audiofile.getChannelData(0);
+
         var y = Array.from(x);
         try{
             if (array===null){
@@ -87,7 +90,11 @@ function myFunction() {
     var mp4boxfile = MP4Box.createFile();
     mp4boxfile.onReady = function(info) {
 
+      
+
     codecinfo = info.videoTracks[0].codec;
+
+
 
     var movieduration = info.videoTracks[0].movie_duration
     var movietimescale = info.videoTracks[0].movie_timescale
@@ -123,11 +130,42 @@ counter++;
 }
 
 if(samples[0].number === 0){
+
 if(id===1){
 	keyframe = samples[0].data
 var avccext = fr.result;
 avcC = avccext.slice(
 samples[0].description.boxes[0].start+samples[0].description.boxes[0].hdr_size, samples[0].description.boxes[0].start+samples[0].description.boxes[0].size)
+
+if (videoDecoder.state==="unconfigured"){
+var config = {
+    codec:codecinfo,
+    codedWidth:videoinfo.width/2,
+      codedHeight: videoinfo.height/2,
+      
+      description:avcC,
+    
+    
+    
+    }
+videoDecoder.configure(config);
+
+}
+
+
+
+var  init  = {
+    type: 'key',
+    data: videodata[0],
+    timestamp: 2000,
+    duration: 37,
+    }; 
+    
+    var chunk = new EncodedVideoChunk(init);
+    
+    videoDecoder.decode(chunk);
+
+    keyframe = videodata[0]
 
 }
 }
