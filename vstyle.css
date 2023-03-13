@@ -1,0 +1,145 @@
+body {
+    font-family: 'MyCustomFont', Arial, sans-serif;
+  }
+  
+
+  
+  
+#navbar{
+   
+    width:50%;
+    float:left;
+    font-size:16px;
+}
+  #navbar a{
+text-decoration: none;
+margin-left: 15px;
+
+    
+  }
+
+  #heavyfun{
+    float:right;
+    width:50%;
+    
+  }
+
+
+  #navbarmain:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+
+.canvas{
+
+    position:absolute;
+    Left:0;
+    bottom:0;
+    padding:20px;
+    background-color: blue;
+}
+
+.button{
+    font-size: 18px;
+    background-color: blue;
+    color:white;
+    border:none;
+    padding:12px;
+}
+.button:hover{
+    background-color:red;
+}
+
+.button1{
+    font-size: 18px;
+    background-color: blue;
+    color:white;
+    border:none;
+    padding:12px;
+}
+.button1:hover{
+    background-color:red;
+}
+
+
+
+
+.iframe{
+    width:60%;
+    height: 460px;
+}
+.input{
+    padding:7px;
+    font-size: 16px;
+}
+
+#file{
+
+    font-size: 18px;
+    background-color: red;
+    color:white;
+    border:none;
+    padding:12px;
+}
+
+#linebreak{
+    display:none;
+}
+
+.info{
+    margin-left:40px;
+}
+
+#menu{
+    display:none;
+}
+#information{
+    display:block;
+}
+
+#audioinfo{
+
+    font-size: 20px;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .button{
+        display:none;
+    }
+
+    .iframe{
+        width:100%;
+        height:350px;
+    }
+
+    #menu{
+        width:100%;
+        display:block;
+    }
+    #linebreak{
+        display:block;
+    }
+
+    #totallength1{
+        margin-left:0px;
+    }
+
+    
+.button2{
+    display:block;
+    border:none;
+    width:100%;
+    padding-bottom:4%;
+    padding-top:3%;
+}
+
+#information{
+    display:none;
+}
+  }

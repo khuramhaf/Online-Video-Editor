@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is free online Video Editor. The Video editor can 
+    perform Video files merging/joining, trimming and cutting.">
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="vwufile.js"></script>
+    <script src="vplay.js"></script>
+    <script src="vwutrim.js"></script>
+    <script src="vwucut.js"></script>
+    <script src="vexport.js"></script>
+    <script src="wugeneratewave.js"></script>
+    <script src = "mp4box.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="vstyle.css">
+    <title>Free Online Video Editor</title>
+</head>
+<body>
+    <div id = "navbarmain">
+<div id = "navbar">
+    <a href="index.html">Audio Editor </a>
+    <a  href="withundo.html">Audio Editor with Undo </a>
+	<a  href="video-editor.html">Video Editor </a>
+    <a href="report.html">Report Bug </a>
+
+</div>
+
+<div id = "heavyfun">
+    <button class="button1" onclick="cleardata()">Clear Data</button>
+    <button class="button1" onclick="exportdata()">Export</button>
+</div>
+</div>
+    <h1>Free Online Video Editor</h1>
+    <input  id = "file" type="file" onchange="myFunction()"/>
+    <br/>
+    <span id="status"></span>
+    <br/>
+    <div>
+    <span>Error: </span>
+    <span style="color:red" id = "error"></span>
+</div>
+<br/>
+    <div id = "audioinfo">
+    <span >Audio Time: </span>
+    <span id = 'timer'>0</span>
+    <span  class ="info">Audio Duration: </span>
+    <span   id = 'duration'>0</span>
+    <br id = "linebreak"/>
+    <span id ="totallength1"  class="info" >Total Length: </span>
+    <span  id = 'totallength'>0</span>
+    <span  class="info">Selected Length: </span>
+    <span  id = 'selectedlength'>0</span>
+</div>
+
+    <div style=" background-color:lightblue;padding:15px;">
+        
+        <div id = "menu">
+<button class="button2" id ="play" onclick="play()">Play</button>
+<button class="button2" id ="stop" onclick="stop()">Stop</button>
+<button class="button2" id ="trim1" onclick="trim()">Trim</button>
+<button class="button2" id="cut1" onclick="cut()">Cut</button>
+<button class="button2" id="generatewave" onclick="generatewave()">Generate Waveform</button>
+<button class="button2" id="exportdata1" onclick="exportdata()">Export</button>
+    </div>
+    <div id = "canvasdraw">
+  <canvas style="border:2px solid black" id = "canvas1"></canvas>
+</div>
+<div id = "videomenu">
+<label>Starting Point in Seconds (you can specify decimal values between 0 and video duration)</label>
+<br/>
+<input class="input" oninput="keydownfun(this)" id = "start" type="text"/>
+<br/>
+<br/>
+<label>Ending Point in Seconds (you can specify decimal values between 0 and video duration)</label>
+<br/>
+<input class="input" oninput="keydownfun(this)" id = "end" type="text"/>
+<br/>
+<br/>
+
+<button class="button" id ="play" onclick="play()">Play</button>
+<button class="button" id ="stop" onclick="stop()">Stop</button>
+<button class="button" id ="trim1" onclick="trim()">Trim</button>
+<button class="button" id="cut1" onclick="cut()">Cut</button>
+<button class="button" id="generatewave" onclick="generatewave()">Generate Waveform</button>
+</div>
+
+
+</div>
+    <h2>How to Use</h2>
+
+    <iframe class="iframe" src="https://www.youtube.com/embed/Wq9ALsLBYMY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<p>To use this app, you need to select an audio file by clicking "Choose File". After selecting the file, put the starting and ending points. The starting point is the starting value in seconds from where you want to cut or trim the audio, and the ending point is the ending value in seconds.
+After providing the starting and ending points, you have two options: trim or cut the audio.
+
+</p>
+<h3>Difference between Trim and Cut</h3>
+<p>Trimming means removing a specific part of the audio. For example, if your audio is 60 seconds long, and you want to trim 10 seconds in the middle, let's say you want to trim the audio from 10 seconds to 20 seconds. The trimming operation will remove the audio from 10 seconds to 20 seconds and save the rest of the audio.
+</p>
+<p>Cutting audio means you will get a specific part of the audio. For example, if you want to cut the audio from 10 seconds to 20 seconds, the cutting operation will return an audio file containing the audio between 10 seconds to 20 seconds.
+</p>
+
+
+<h3>Audio files Merging/Joining</h3>
+
+<p>
+    This application has the capability to join or merge multiple audio files together. 
+    To accomplish this task, all you have to do is select the audio files you want to 
+    combine. Simply press the "Choose file" button to pick a new file, and it will 
+    automatically be added to the previously selected file.
+</p>
+
+<h3>Exporting Audio</h3>
+<p>Once you done editing you can export file into and mp3 format by clicking "Export" button</p>
+<p>Report any problem at <span style="color:blue;">contact@musk-technology.com</span></p>
+    <script>
+
+        var array = []; //this is main audio array
+        var audiocontext;
+        var source;
+        var time=0;
+        let intervalid;
+        var check = null;
+        var sourcecheck = null;
+        var sourceduration = 0;
+
+        var videodata = []; //this is main video array
+        var codecinfo;
+        var avcC;
+
+        var videointerval;
+var videochunk =[];
+
+var exportflag=0;
+var keyframe;
+
+        var videoinfo = {
+          width:0,
+          height:0,
+          duration:0,
+          samplerate:0,
+        }
+
+
+        var videoDecoder = new VideoDecoder({
+  output: processVideo,
+  error: onDecoderError,
+});
+
+function processVideo(frame){
+
+   var canvas = document.getElementById("canvas1");
+   var ctx = canvas.getContext("2d");
+   ctx.clearRect(0,0, canvas.width, canvas.height);
+   if(exportflag===0){
+   ctx.drawImage(frame, 0, 0, videoinfo.width/2, videoinfo.height/2)
+}
+if(exportflag===1){
+   ctx.drawImage(frame, 0, 0, videoinfo.width, videoinfo.height)
+}
+    frame.close();
+
+    
+}
+
+function onDecoderError(error){
+
+    console.log(error);
+}
+
+
+
+      
+       
+        function keydownfun(){
+
+            if (check!==null){
+
+            var start =parseFloat(document.getElementById("start").value)
+            var end =parseFloat(document.getElementById("end").value);
+            var index = end*audiocontext.sampleRate - start*audiocontext.sampleRate;
+            document.getElementById("selectedlength").innerHTML=parseInt(index);
+        }
+
+        document.getElementById("error").innerHTML = "";
+        }
+
+
+
+
+
+function stop(){
+if (source){
+    source.stop();
+    clearInterval(intervalid);
+    clearInterval(videointerval);
+}
+}
+
+
+
+
+
+
+
+ 
+
+       
+
+
+function cleardata(){
+    if (source){
+        source.stop();
+    }
+    clearInterval(intervalid);
+    clearInterval(videointerval);
+
+    array = null;
+    time = 0;
+    videodata = [];
+
+    document.getElementById("timer").innerHTML = '';
+    document.getElementById("duration").innerHTML = "";
+    document.getElementById("totallength").innerHTML="";
+    document.getElementById("selectedlength").innerHTML = "";
+}
+    </script>
+</body>
+</html>
