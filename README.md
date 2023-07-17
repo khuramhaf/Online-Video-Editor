@@ -4,3 +4,9 @@ The Web Coded API and Web Audio API are used for decoding audio and video. The v
 The JavaScript Recorder is used to Recode the video and convert into a .webp file. 
 
 If you want to participate in the project look at the issues
+
+
+You can see code explanation by visiting following link.
+https://youtu.be/11VDNvO3h2c
+
+I am also looking for someone who can translate this video into English
