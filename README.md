@@ -9,4 +9,5 @@ If you want to participate in the project look at the issues
 You can see code explanation in URDU by visiting following link.
 https://youtube.com/playlist?list=PLOITgGWlzuT41v1mKV9yqvKWOKYYmSePS
 
-I am also looking for someone who can translate this video into English
+You can also read the code explanation in English from the following link
+https://www.amooiz.com/Tutorial.html
