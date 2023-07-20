@@ -6,7 +6,7 @@ The JavaScript Recorder is used to Recode the video and convert into a .webp fil
 If you want to participate in the project look at the issues
 
 
-You can see code explanation by visiting following link.
-https://youtu.be/11VDNvO3h2c
+You can see code explanation in URDU by visiting following link.
+https://www.youtube.com/playlist?list=PLOITgGWlzuT41v1mKV9yqvKWOKYYmSePS
 
 I am also looking for someone who can translate this video into English
