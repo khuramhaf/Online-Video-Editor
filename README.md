@@ -6,12 +6,8 @@ The JavaScript Recorder is used to Recode the video and convert into a .webm fil
 If you want to participate in the project look at the issues
 
 
-You can see code explanation in URDU by visiting following link.
-https://youtube.com/playlist?list=PLOITgGWlzuT41v1mKV9yqvKWOKYYmSePS
+For those seeking to expand their knowledge of the development process, my course on Udemy offers an invaluable resource.
+https://www.udemy.com/course/how-to-make-a-video-editing-software/?referralCode=17A584975BE781B25E15
 
-
-You can see code explanation in English by visiting following link.
-https://youtube.com/playlist?list=PLOITgGWlzuT6SlsmmVA2AkuyR-sxlKmzo
-
-You can also read the code explanation in English from the following link
+If you want to learn for free than visit the following link
 https://www.amooiz.com/Tutorial.html
