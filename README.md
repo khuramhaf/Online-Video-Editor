@@ -2,7 +2,7 @@ Online MP4 Video Editor with Web APIs
 
 Edit MP4 videos online without uploading files to a server. Our browser-based video editor uses the Web Coded API and Web Audio API to decode audio and video. The video editor provides trimming and cutting functionality, and also allows for audio extraction from video files. The JavaScript Recorder is used to recode the video and convert it into a .webm file.
 
-##Features:
+Features:
 
 - Trim and cut videos
 - Extract audio from videos
