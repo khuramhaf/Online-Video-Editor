@@ -14,5 +14,5 @@ If you want to participate in the project look at the issues
 
 
 For those seeking to expand their knowledge of the development process, my course on Udemy offers an invaluable resource.
-https://www.udemy.com/course/how-to-make-a-video-editing-software/?couponCode=ABDULMOIZ
+https://www.udemy.com/course/how-to-make-a-video-editing-software/?referralCode=17A584975BE781B25E15
 
