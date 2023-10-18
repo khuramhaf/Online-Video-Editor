@@ -17,8 +17,3 @@ If you want to participate in the project look at the issues
 
 For those seeking to expand their knowledge of the development process, my course offers an invaluable resource.
 https://khuram-hafeez-s-school.teachable.com/p/how-to-develop-javascript-based-video-editor
-
-
-This is advertising Link
-https://www.highcpmrevenuegate.com/p2knnaed?key=db5ba4a2994e77c09eec60e4d30ad3e8
-
