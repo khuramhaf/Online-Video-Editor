@@ -10,6 +10,10 @@ Features:
 - No downloads or installations required
 - Works on all major browsers
 
+- You can view the website by clicking on the following link
+
+- https://www.amooiz.com/video-editor.html
+
 If you want to participate in the project look at the issues
 
 
