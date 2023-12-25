@@ -17,5 +17,6 @@ For those seeking to expand their knowledge of the development process, my cours
 https://khuram-hafeez-s-school.teachable.com/p/how-to-develop-javascript-based-video-editor
 
 
-see our latest video editor
+# See Our Latest Video Editor
 https://www.amooiz.com
+
